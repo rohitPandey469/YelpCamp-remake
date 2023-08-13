@@ -1,0 +1,56 @@
+<%-layout('layouts/boilerplate')%>
+<div
+  id="map"
+  style="
+    width: 100%;
+    height: 500px;
+  "
+></div>
+<div class="container">
+  <h1 style="margin-top: 1.3rem; margin-bottom: 0.8rem">Campgrounds</h1>
+  <h5>
+    To add a new camp
+    <a style="text-decoration: none" href="/campgrounds/new">click here</a>
+  </h5>
+  <div>
+    <%for(let camp of campgrounds) {%>
+    <div class="card mb-3">
+      <div class="row">
+        <div class="col-md-4">
+          <img
+            crossorigin="anonymous" 
+            src=" <%=camp.images[0].url%>"
+            alt="loading..."
+            style="max-width: 100%; height: 100%"
+          />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><%=camp.title%></h5>
+            <p class="card-text"><%=camp.description%></p>
+            <p class="card-text">
+              <small class="text-muted"><%=camp.location%></small>
+            </p>
+            <a
+              href="/campgrounds/<%=camp._id%>"
+              class="btn btn-primary"
+              style="width: 90px"
+              >View</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% } %>
+  </div>
+</div>
+
+<!-- Before actual clusterMap so can access the variables in clusterMap.js -->
+<script>
+  const campgrounds= {features:<%-JSON.stringify(campgrounds)%>};
+  const mapTilerToken="<%-process.env.MAPTILER_API_KEY%>";
+</script>
+
+<!-- Will access variables defined in previous script -->
+<script crossorigin="anonymous" src="/javascripts/clusterMap.js"></script>
