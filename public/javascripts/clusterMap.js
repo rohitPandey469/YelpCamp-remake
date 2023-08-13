@@ -1,7 +1,7 @@
 maptilersdk.config.apiKey = mapTilerToken;
 const map = new maptilersdk.Map({
   container: "map",
-  zoom: 0.6,
+  zoom: 1.6,
   center: [0, 20],
   style: maptilersdk.MapStyle.DATAVIZ.DARK,
 });
